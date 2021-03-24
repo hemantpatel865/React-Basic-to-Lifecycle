@@ -1,0 +1,7 @@
+.Charbox {
+    display: inline-block;
+    background-color: #eee;
+    border: 1px solid skyblue;
+    padding: 30px;
+    margin: 16px;
+}
