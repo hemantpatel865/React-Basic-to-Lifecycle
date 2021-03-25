@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import classes from './App.module.css';
 import Persons from '../components/Persons//Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
+import withClass from '../Hoc/withClass';
+import Auxiliary from '../Hoc/Auxiliary'
 
 class App extends Component {
 
@@ -19,7 +21,8 @@ class App extends Component {
       { id: 'asdf11', name: 'Ankit', age: 25 }
     ],
     otherState: 'some other value',
-    showPersons: false
+    showPersons: false,
+    showCockpit: true
   };
   
   static getDerivedStateFromProps(props,state){
@@ -80,21 +83,26 @@ class App extends Component {
     }
 
     return (
-      <div className={classes.App}>
-        <Cockpit 
+      
+      <Auxiliary >
+        <button onClick={() => {this.setState({showCockpit: false})}}>Remove Cockpit</button>
+        {
+          this.state.showCockpit ?<Cockpit 
         title={this.props.appTitle}
         showPersons={this.state.showPersons}
-        persons={this.state.persons}
+        personsLength={this.state.persons.length}
         toggled={this.togglePersonsHandler}
-        />
+        />: null
+        }
         {persons}
-      </div>
+      </Auxiliary>
+      
     );
     // return React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'Does this work now?'));
   }
 }
 
-export default App;
+export default withClass(App, classes.App);
 
 
 
